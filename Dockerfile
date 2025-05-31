@@ -18,8 +18,11 @@ RUN apt-get update && apt-get install -y \
 # Install RealSense SDK
 RUN apt-get update && apt-get install -y \
     software-properties-common \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE \
-    && add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -y \
+    gnupg2 \
+    curl \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | gpg --dearmor > /etc/apt/keyrings/librealsense.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/librealsense.gpg] https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/librealsense.list \
     && apt-get update && apt-get install -y \
     librealsense2-dkms \
     librealsense2-utils \
