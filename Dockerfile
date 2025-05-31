@@ -51,7 +51,15 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # Clone and setup MonoDepth2
 RUN git clone https://github.com/nianticlabs/monodepth2.git \
     && cd monodepth2 \
-    && pip3 install --no-cache-dir -r requirements.txt
+    && pip3 install --no-cache-dir \
+        torch>=1.0.0 \
+        torchvision>=0.2.1 \
+        opencv-python>=3.4 \
+        matplotlib>=3.0.2 \
+        scikit-learn>=0.19.2 \
+        scikit-image>=0.15.0 \
+        tensorboardX>=1.4 \
+        tqdm>=4.40.0
 
 # Download pretrained model
 RUN wget https://storage.googleapis.com/niantic-lon-static/research/monodepth2/mono%2Bstereo_640x192.zip \
