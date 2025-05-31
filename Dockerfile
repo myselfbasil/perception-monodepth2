@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install RealSense SDK
+# Install RealSense SDK (non-DKMS version)
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     gnupg2 \
@@ -24,9 +24,10 @@ RUN apt-get update && apt-get install -y \
     && curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | gpg --dearmor > /etc/apt/keyrings/librealsense.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/librealsense.gpg] https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/librealsense.list \
     && apt-get update && apt-get install -y \
-    librealsense2-dkms \
+    librealsense2 \
     librealsense2-utils \
     librealsense2-dev \
+    libudev1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
