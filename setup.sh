@@ -11,11 +11,6 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-# Clean up any existing containers and images
-echo "Cleaning up existing Docker resources..."
-docker-compose down 2>/dev/null
-docker system prune -f
-
 # Build and start the container
 echo "Building and starting the perception system..."
 docker-compose up --build
