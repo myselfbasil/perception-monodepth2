@@ -1,0 +1,16 @@
+version: '3'
+services:
+  perception:
+    build: .
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .:/app
+    devices:
+      - /dev/video0:/dev/video0
+      # Add additional video devices if needed (e.g., /dev/video1)
+    privileged: true  # Required for RealSense camera access
+    network_mode: host  # Required for display forwarding

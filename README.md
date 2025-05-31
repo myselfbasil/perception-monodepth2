@@ -5,12 +5,41 @@ A real-time scene understanding system that combines MonoDepth2 monocular depth 
 ## Prerequisites
 
 - Ubuntu 22.04.05
-- Python 3.8+
-- CUDA-capable GPU (recommended)
+- NVIDIA GPU with CUDA support
+- Docker and Docker Compose
+- NVIDIA Container Toolkit
 - Intel RealSense D435i camera
 - USB 3.0 port
 
 ## Installation
+
+### Option 1: Using Docker (Recommended)
+
+1. Install Docker and NVIDIA Container Toolkit:
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Install NVIDIA Container Toolkit
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+```
+
+2. Build and run using Docker Compose:
+```bash
+# Build the Docker image
+docker-compose build
+
+# Run the system
+docker-compose up
+```
+
+### Option 2: Manual Installation
 
 1. Install RealSense SDK:
 ```bash
