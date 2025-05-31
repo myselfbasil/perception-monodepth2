@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   perception:
     build: .
@@ -7,14 +7,5 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
       - DISPLAY=${DISPLAY}
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
       - .:/app
-      - /dev/bus/usb:/dev/bus/usb  # USB passthrough for RealSense
-    devices:
-      - /dev/video0:/dev/video0
-      - /dev/video1:/dev/video1  # RealSense often uses multiple video devices
-    group_add:
-      - video  # Add container to video group
-    privileged: true  # Required for RealSense camera access
-    network_mode: host  # Required for display forwarding
-    ipc: host  # Shared memory for OpenCV windows
+    network_mode: host
