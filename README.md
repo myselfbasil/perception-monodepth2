@@ -15,12 +15,8 @@ A real-time scene understanding system that combines MonoDepth2 monocular depth 
 
 ### Option 1: Using Docker (Recommended)
 
-1. Install Docker and NVIDIA Container Toolkit:
+1. Install NVIDIA Container Toolkit:
 ```bash
-# Install Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-
 # Install NVIDIA Container Toolkit
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
@@ -30,14 +26,20 @@ sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 ```
 
-2. Build and run using Docker Compose:
+2. Run the setup script:
 ```bash
-# Build the Docker image
-docker-compose build
+# Make the setup script executable
+chmod +x setup.sh
 
-# Run the system
-docker-compose up
+# Run the setup script
+./setup.sh
 ```
+
+The setup script will:
+- Install Docker if not present
+- Install Docker Compose if not present
+- Clean up any existing containers
+- Build and start the system
 
 ### Option 2: Manual Installation
 
