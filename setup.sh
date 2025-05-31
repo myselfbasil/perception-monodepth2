@@ -13,6 +13,6 @@ fi
 
 # Build and start the container
 echo "Building and starting the perception system..."
-docker-compose up --build
+docker compose up --build
 
 echo "Setup complete!"
