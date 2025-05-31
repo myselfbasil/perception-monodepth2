@@ -15,11 +15,18 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install RealSense SDK (non-DKMS version)
+# Install system dependencies including RealSense SDK
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     gnupg2 \
     curl \
+    udev \
+    libusb-1.0-0 \
+    libglfw3-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    && mkdir -p /etc/udev/rules.d \
+    && curl -sSf https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules > /etc/udev/rules.d/99-realsense-libusb.rules \
     && mkdir -p /etc/apt/keyrings \
     && curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | gpg --dearmor > /etc/apt/keyrings/librealsense.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/librealsense.gpg] https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/librealsense.list \
@@ -27,7 +34,6 @@ RUN apt-get update && apt-get install -y \
     librealsense2 \
     librealsense2-utils \
     librealsense2-dev \
-    libudev1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory

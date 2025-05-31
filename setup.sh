@@ -2,19 +2,13 @@
 
 echo "Setting up Perception System..."
 
-# Check if Docker is installed
+# Check if Docker is available
 if ! command -v docker &> /dev/null; then
-    echo "Docker not found. Installing Docker..."
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
-    rm get-docker.sh
-fi
-
-# Check if docker-compose is installed
-if ! command -v docker-compose &> /dev/null; then
-    echo "Docker Compose not found. Installing Docker Compose..."
-    sudo apt-get update
-    sudo apt-get install -y docker-compose
+    echo "Error: Docker is not installed or you don't have permission to use it."
+    echo "Please ensure:"
+    echo "1. Docker is installed"
+    echo "2. Your user is in the docker group"
+    exit 1
 fi
 
 # Clean up any existing containers and images
